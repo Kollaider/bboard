@@ -1,3 +1,4 @@
+from django.contrib.auth.views import LoginView
 from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.template import TemplateDoesNotExist
@@ -13,3 +14,6 @@ def other_page(request, page):
     except TemplateDoesNotExist:
         raise Http404
     return HttpResponse(template.render(request=request))
+
+class BBLoginView(LoginView):
+    template_name = 'main/login.html'
