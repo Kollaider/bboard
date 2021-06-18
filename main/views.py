@@ -4,6 +4,11 @@ from django.http import HttpResponse, Http404
 from django.shortcuts import render
 from django.template import TemplateDoesNotExist
 from django.template.loader import get_template
+from django.urls import reverse_lazy
+from django.views.generic import CreateView, TemplateView
+
+from main.forms import RegisterUserForm
+from main.models import AdvUser
 
 
 def index(request):
@@ -22,3 +27,13 @@ class BBLoginView(LoginView):
 @login_required
 def profile(request):
     return render(request, 'main/profile.html')
+
+
+class RegisterUserView(CreateView):
+    model = AdvUser
+    template_name = 'main/register_user.html'
+    form_class = RegisterUserForm
+    success_url = reverse_lazy('main:register_done')
+
+class RegisterDoneView(TemplateView):
+    template_name = 'main/register_done.html'
