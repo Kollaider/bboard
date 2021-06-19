@@ -123,6 +123,9 @@ class DeleteUserView(LoginRequiredMixin, DeleteView):
             queryset = self.get_queryset()
         return get_object_or_404(queryset, pk=self.user_id)
 
+
+def by_rubric(request, pk):
+    pass
 # class BBPasswordResetView(PasswordResetView):
 #     template_name = 'main/password_reset.html'
 #     subject_template_name = 'email/reset_letter_subject.txt'
