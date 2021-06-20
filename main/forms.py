@@ -4,7 +4,8 @@ from django.core.exceptions import ValidationError
 from django.forms import inlineformset_factory
 # from captcha.fields import CaptchaField
 
-from .models import AdvUser, SuperRubric, SubRubric  # , SuperRubric, SubRubric, Bb, AdditionalImage, Comment
+from .models import AdvUser, SuperRubric, SubRubric, Bb, \
+    AdditionalImage  # , SuperRubric, SubRubric, Bb, AdditionalImage, Comment
 from .apps import user_registered
 
 
@@ -69,18 +70,18 @@ class SubRubricForm(forms.ModelForm):
     class Meta:
         model = SubRubric
         fields = '__all__'
+
+class SearchForm(forms.Form):
+    keyword = forms.CharField(required=False, max_length=20, label='')
 #
-# class SearchForm(forms.Form):
-#     keyword = forms.CharField(required=False, max_length=20, label='')
-#
-# class BbForm(forms.ModelForm):
-#     class Meta:
-#         model = Bb
-#         fields = '__all__'
-#         widgets = {'author': forms.HiddenInput}
-#
-# AIFormSet = inlineformset_factory(Bb, AdditionalImage, fields='__all__')
-#
+class BbForm(forms.ModelForm):
+    class Meta:
+        model = Bb
+        fields = '__all__'
+        widgets = {'author': forms.HiddenInput}
+
+AIFormSet = inlineformset_factory(Bb, AdditionalImage, fields='__all__')
+
 # class UserCommentForm(forms.ModelForm):
 #     class Meta:
 #         model = Comment

@@ -2,7 +2,7 @@ from django.contrib import admin
 import datetime
 
 from .forms import SubRubricForm
-from .models import AdvUser #, Bb, AdditionalImage, Comment
+from .models import AdvUser, AdditionalImage, Bb
 # from .forms import SubRubricForm
 
 from .utilities import send_activation_notification
@@ -71,3 +71,16 @@ class SubRubricAdmin(admin.ModelAdmin):
     form = SubRubricForm
 
 admin.site.register(SubRubric, SubRubricAdmin)
+
+
+class AdditionalImageInline(admin.TabularInline):
+    model = AdditionalImage
+
+
+class BbAdmin(admin.ModelAdmin):
+    list_display = ('rubric', 'title', 'content', 'author', 'created_at')
+    fields = (('rubric', 'author'), 'title', 'content', 'price',
+              'contacts', 'image', 'is_active')
+    inlines = (AdditionalImageInline,)
+
+admin.site.register(Bb, BbAdmin)
