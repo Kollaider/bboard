@@ -22,11 +22,11 @@ from django.conf.urls.static import static
 
 
 urlpatterns = [
+    path('captcha/', include('captcha.urls')),
     path('admin/', admin.site.urls),
     path('', include('main.urls'))
 ]
 
 if settings.DEBUG:
     urlpatterns.append(path('staic/<path:path>', never_cache(serve)))
-    urlpatterns += static(settings.MEDIA_URL,
-                          document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
